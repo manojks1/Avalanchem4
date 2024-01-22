@@ -9,27 +9,27 @@ contract DegenToken is ERC20, ERC20Burnable {
 
 
     constructor() ERC20("Degen", "DGN") {
-        store = "The Official Degen store has the following redeemable items: 1.  Lamp 2.  Toy 3. Car ";
+        store = "The Official Degen store has the following redeemable items: 1. Pen 2. Toy 3. Car ";
     }
 
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
     }
 
-    function redeem(uint256 choice,bool _store) public  {
-        require(_store==true,"Make sure you have read the item lists available in our store");
-        if (balanceOf(msg.sender) < 500) {
+    function redeem(uint256 choice) public  {
+       
+        if (balanceOf(msg.sender) < 50) {
             revert("Insufficient Balance");
         }
         assert(choice >= 1 && choice <= 3);
-        _burn(msg.sender, choice * 100);
+        _burn(msg.sender, choice * 2);
        
     }
 
    function Donate() public {
         
-        require(balanceOf(msg.sender) >= 50, "Insufficient Tokens for Donation");
-        _burn(msg.sender, 50);
+        require(balanceOf(msg.sender) >= 5, "Insufficient Tokens for Donation");
+        _burn(msg.sender, 1);
         
         emit DonationMade("You made a donation!");
     }
